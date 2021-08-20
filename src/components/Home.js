@@ -5,13 +5,13 @@ export default function Home() {
   return (
     <div>
       <h1>Build Your Own Pizza!</h1>
-      <Link to="/order-pizza">
+      <Link to="/pizza" id="order-pizza">
         <button id="start-order">Start an order</button>
       </Link>
 
-      <Link to="/pizza">
+      {/* <Link to="/pizza">
         <button>Show order(s)</button>
-      </Link>
+      </Link> */}
     </div>
   );
 }

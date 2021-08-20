@@ -11,6 +11,7 @@ import Order from "./Order";
 const initialSelections = {
   name: "",
   size: "",
+  specialInstructions: "",
   pepperoni: false,
   sausage: false,
   blackOlives: false,
@@ -46,10 +47,12 @@ export default function App() {
       .post(`https://reqres.in/api/orders`, newOrder)
       .then((res) => {
         setOrders([res.data.data, ...orders]);
+        setSelections(initialSelections);
+        setFormErrors(initialFormErrors);
       })
       .catch((err) => console.error(err));
 
-    setSelections(initialSelections);
+    // setSelections(initialSelections);
   };
 
   const validate = (name, value) => {
@@ -73,8 +76,10 @@ export default function App() {
       sausage: selections.sausage,
       blackOlives: selections.blackOlives,
       extraCheese: selections.extraCheese,
+      specialInstructions: selections.specialInstructions.trim(),
     };
     postNewOrder(newOrder);
+    console.log(newOrder);
   };
 
   // useEffect(() => {
@@ -98,7 +103,7 @@ export default function App() {
       </nav>
 
       <Switch>
-        <Route path="/order-pizza">
+        <Route path="/pizza">
           <PizzaForm
             selections={selections}
             change={inputChange}
@@ -106,14 +111,12 @@ export default function App() {
             disabled={disabled}
             errors={formErrors}
           />
-          <Route path="/pizza">
+
+          {/* <Route path="/pizza">
             <Order selections={selections} />
-          </Route>
+          </Route> */}
         </Route>
-        {/* <Route>
-        <Help />
-      </Route> */}
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

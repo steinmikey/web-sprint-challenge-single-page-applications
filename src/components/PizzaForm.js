@@ -10,7 +10,6 @@ export default function PizzaForm(props) {
 
   const onChange = (evt) => {
     const { name, value, checked, type } = evt.target;
-    // const nameToUse = type === "text" ? id : name;
     const valueToUse = type === "checkbox" ? checked : value;
 
     change(name, valueToUse);
@@ -22,25 +21,13 @@ export default function PizzaForm(props) {
       <form onSubmit={onSubmit} id="pizza-form">
         <div>
           <h4>What size pizza?</h4>
-          <select id="size-dropdown">
-            <option value="">--select a size--</option>
+          <select id="size-dropdown" defaultValue="medium" onChange={onChange}>
             <option value="small">Small, 8"</option>
             <option value="medium">Medium, 12"</option>
             <option value="large">Large, 14"</option>
           </select>
         </div>
 
-        {/* <div>
-          <h4>What sauce would you like?</h4>
-          <label>
-            <input type="radio" name="original-red" />
-            Original Red
-          </label>
-          <label>
-            <input type="radio" name="barbecue" />
-            BBQ
-          </label>
-        </div> */}
         <div className="topping-checkboxes">
           <h4>Add Your Toppings</h4>
           <label>
@@ -60,10 +47,15 @@ export default function PizzaForm(props) {
             ExtraCheese
           </label>
         </div>
-        {/* <div>Crust substitute</div> */}
         <div>
           Special Instructions
-          <input id="special-text" type="text" />
+          <input
+            id="special-text"
+            type="text"
+            name="specialInstructions"
+            value={selections.specialInstructions}
+            onChange={onChange}
+          />
         </div>
 
         <div>
@@ -77,7 +69,6 @@ export default function PizzaForm(props) {
             onChange={onChange}
           />
         </div>
-        {/* <div>How Many?</div> */}
         <div className="errors">
           <div>{errors.name}</div>
           <div>{errors.size}</div>

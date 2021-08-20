@@ -7,6 +7,7 @@ const formSchema = yup.object().shape({
   sausage: yup.boolean(),
   blackOlives: yup.boolean(),
   extraCheese: yup.boolean(),
+  specialInstructions: yup.string().trim(),
 });
 
 export default formSchema;
