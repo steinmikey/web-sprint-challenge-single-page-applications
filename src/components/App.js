@@ -1,10 +1,12 @@
-import React, { useState, useEfffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
+import * as yup from "yup";
 
+import schema from "../validation/formSchema";
 import Home from "./Home";
 import PizzaForm from "./PizzaForm";
 import Order from "./Order";
-import axios from "axios";
 
 const initialSelections = {
   name: "",
@@ -20,14 +22,23 @@ const initialSelections = {
 };
 
 const initialOrders = [];
+const initialDisabled = true;
 
 export default function App() {
   const [orders, setOrders] = useState(initialOrders);
   const [selections, setSelections] = useState(initialSelections);
+  const [disabled, setDisabled] = useState(initialDisabled);
 
-  const getOrder = () => {
-    axios.get();
-  };
+  // const getOrders = () => {
+  //   axios
+  //     .get(`https://reqres.in/api/orders`)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   const postNewOrder = (newOrder) => {
     axios.post(`https://reqres.in/api/orders`, newOrder).then((res) => {
@@ -55,6 +66,14 @@ export default function App() {
     };
     postNewOrder(newOrder);
   };
+
+  // useEffect(() => {
+  //   getOrders();
+  // }, []);
+
+  useEffect(() => {
+    schema.isValid(selections).then((valid) => setDisabled(!valid));
+  }, [selections]);
 
   return (
     <div>
