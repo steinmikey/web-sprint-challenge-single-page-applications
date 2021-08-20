@@ -19,7 +19,7 @@ export default function PizzaForm(props) {
   return (
     <div>
       <h3>Build your pizza:</h3>
-      <form onSubmit={onSubmit} id="order-pizza">
+      <form onSubmit={onSubmit} id="pizza-form">
         <div>
           <h4>What size pizza?</h4>
           <select id="size-dropdown">

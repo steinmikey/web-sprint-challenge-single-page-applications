@@ -6,7 +6,7 @@ export default function Home() {
     <div>
       <h1>Build Your Own Pizza!</h1>
       <Link to="/order-pizza">
-        <button>Start an order</button>
+        <button id="start-order">Start an order</button>
       </Link>
 
       <Link to="/pizza">
