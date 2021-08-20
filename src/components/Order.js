@@ -7,7 +7,7 @@ export default function Order(props) {
     <div>
       <h4>Your Order</h4>
       You've selected:
-      {selections}
+      {/* {selections} */}
     </div>
   );
 }

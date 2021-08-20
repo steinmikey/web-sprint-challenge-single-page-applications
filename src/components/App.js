@@ -15,10 +15,14 @@ const initialSelections = {
   sausage: false,
   canadianBacon: false,
   spicyItalianSausage: false,
-  onion: false,
+  onions: false,
   greenPeppers: false,
   blackOlives: false,
   extraCheese: false,
+};
+
+const initialFormErrors = {
+  name: "",
 };
 
 const initialOrders = [];
@@ -27,6 +31,7 @@ const initialDisabled = true;
 export default function App() {
   const [orders, setOrders] = useState(initialOrders);
   const [selections, setSelections] = useState(initialSelections);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
   // const getOrders = () => {
@@ -41,25 +46,38 @@ export default function App() {
   // };
 
   const postNewOrder = (newOrder) => {
-    axios.post(`https://reqres.in/api/orders`, newOrder).then((res) => {
-      // setFriends([res.?, ...orders])
-    });
+    axios
+      .post(`https://reqres.in/api/orders`, newOrder)
+      .then((res) => {
+        setOrders([res.data.data, ...orders]);
+      })
+      .catch((err) => console.error(err));
+
+    setSelections(initialSelections);
+  };
+
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: "" }))
+      .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
   };
 
   const inputChange = (name, value) => {
-    // validate(name, value);
+    validate(name, value);
     setSelections({ ...selections, [name]: value });
   };
 
   const formSubmit = () => {
     const newOrder = {
-      name: selections.name,
+      name: selections.name.trim(),
       size: selections.size,
       pepperoni: selections.pepperoni,
       sausage: selections.sausage,
       canadianBacon: selections.canadianBacon,
       spicyItalianSausage: selections.spicyItalianSausage,
-      onion: selections.onion,
+      onions: selections.onions,
       greenPeppers: selections.greenPeppers,
       blackOlives: selections.blackOlives,
       extraCheese: selections.extraCheese,
@@ -73,6 +91,8 @@ export default function App() {
 
   useEffect(() => {
     schema.isValid(selections).then((valid) => setDisabled(!valid));
+    // console.log(selections);
+    // console.log(disabled);
   }, [selections]);
 
   return (
@@ -87,7 +107,13 @@ export default function App() {
 
       <Switch>
         <Route path="/order-pizza">
-          <PizzaForm selections={selections} change={inputChange} />
+          <PizzaForm
+            selections={selections}
+            change={inputChange}
+            addToOrder={formSubmit}
+            disabled={disabled}
+            errors={formErrors}
+          />
           <Route path="/pizza">
             <Order selections={selections} />
           </Route>
