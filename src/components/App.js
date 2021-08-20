@@ -13,10 +13,6 @@ const initialSelections = {
   size: "",
   pepperoni: false,
   sausage: false,
-  canadianBacon: false,
-  spicyItalianSausage: false,
-  onions: false,
-  greenPeppers: false,
   blackOlives: false,
   extraCheese: false,
 };
@@ -75,10 +71,6 @@ export default function App() {
       size: selections.size,
       pepperoni: selections.pepperoni,
       sausage: selections.sausage,
-      canadianBacon: selections.canadianBacon,
-      spicyItalianSausage: selections.spicyItalianSausage,
-      onions: selections.onions,
-      greenPeppers: selections.greenPeppers,
       blackOlives: selections.blackOlives,
       extraCheese: selections.extraCheese,
     };

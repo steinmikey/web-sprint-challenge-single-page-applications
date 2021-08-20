@@ -52,27 +52,6 @@ export default function PizzaForm(props) {
             Sausage
           </label>
           <label>
-            <input type="checkbox" name="canadianBacon" checked={selections.canadianBacon} onChange={onChange} />
-            Canadian Bacon
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="spicyItalianSausage"
-              checked={selections.spicyItalianSausage}
-              onChange={onChange}
-            />
-            Spicy Italian Sausage
-          </label>
-          <label>
-            <input type="checkbox" name="onions" checked={selections.onions} onChange={onChange} />
-            Onions
-          </label>
-          <label>
-            <input type="checkbox" name="greenPeppers" checked={selections.greenPeppers} onChange={onChange} />
-            Green Peppers
-          </label>
-          <label>
             <input type="checkbox" name="blackOlives" checked={selections.blackOlives} onChange={onChange} />
             Black Olives
           </label>
