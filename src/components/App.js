@@ -46,7 +46,7 @@ export default function App() {
     axios
       .post(`https://reqres.in/api/orders`, newOrder)
       .then((res) => {
-        setOrders([res.data.data, ...orders]);
+        setOrders([...orders, newOrder]);
         setSelections(initialSelections);
         setFormErrors(initialFormErrors);
       })
@@ -85,6 +85,10 @@ export default function App() {
   // useEffect(() => {
   //   getOrders();
   // }, []);
+  useEffect(() => {
+    console.log(orders);
+    // console.log(selections);
+  }, [orders]);
 
   useEffect(() => {
     schema.isValid(selections).then((valid) => setDisabled(!valid));
@@ -110,6 +114,7 @@ export default function App() {
             addToOrder={formSubmit}
             disabled={disabled}
             errors={formErrors}
+            orders={orders}
           />
 
           {/* <Route path="/pizza">
@@ -120,6 +125,17 @@ export default function App() {
           <Home />
         </Route>
       </Switch>
+      <div>
+        {orders.map((order, index) => {
+          return (
+            <div>
+              {" "}
+              <h4>Order</h4>
+              <Order key={index} selections={order} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
