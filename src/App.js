@@ -3,10 +3,10 @@ import { Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 
-import schema from "../validation/formSchema";
-import Home from "./Home";
-import PizzaForm from "./PizzaForm";
-import Order from "./Order";
+import schema from "./validation/formSchema";
+import Home from "./components/Home";
+import PizzaForm from "./components/PizzaForm";
+import Order from "./components/Order";
 
 const initialSelections = {
   name: "",
