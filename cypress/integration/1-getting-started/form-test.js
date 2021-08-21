@@ -10,6 +10,7 @@ describe("Lambda Eats App", () => {
   const sausage = () => cy.get(`input[name='sausage']`);
   const blackOlives = () => cy.get(`input[name='blackOlives']`);
   const extraCheese = () => cy.get(`input[name='extraCheese']`);
+  const notes = () => cy.get(`input[id='special-text']`);
 
   it("Testing testing", () => {
     expect(4 + 7).to.equal(11);
@@ -38,6 +39,20 @@ describe("Lambda Eats App", () => {
       sausage().check().should("be.checked");
       blackOlives().check().should("be.checked");
       extraCheese().check().should("be.checked");
+    });
+  });
+
+  describe("Check Order Can be submitted", () => {
+    it("Can submit order with multiple toppings if size is selected and name is entered", () => {
+      startOrder().click();
+      inputName().type("Misha");
+      pepperoni().check().should("be.checked");
+      sausage().check().should("be.checked");
+      blackOlives().check().should("be.checked");
+      extraCheese().check().should("be.checked");
+      selectSize().select("medium");
+      notes().type("thin crust");
+      submit().click();
     });
   });
 });
